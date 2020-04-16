@@ -67,6 +67,38 @@
 
     </div>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            const tableSection = $("#tableSection");
+            const waitlistSection = $("#waitlistSection");
+
+            async function init() {
+                const reservations = await $.ajax({
+                    url: "http://localhost:8000/reservations",
+                    method: "GET"
+                });
+                if (reservations != null && reservations.length > 0) {
+                    reservations.forEach((element, index) => {
+                        let newReservation = $("<p>").text(`Table No ${index + 1} | ${element.uniqueID}`);
+                        tableSection.append(newReservation);
+                    });
+                }
+                const waitlist = await $.ajax({
+                    url: "http://localhost:8000/waitlist",
+                    method: "GET"
+                });
+                if (waitlist != null && waitlist.length > 0) {
+                    waitlist.forEach((element, index) => {
+                        let newWaitlist = $("<p>").text(`Waitlist No ${index + 1} | ${element.uniqueID}`);
+                        waitlistSection.append(newWaitlist);
+                    });
+                }
+            }
+
+            init();
+        });
+    </script>
 </body>
 
 </html>
