@@ -10,14 +10,14 @@ var PORT = process.env.PORT || 8000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get("/index", function (req, res) {
-  res.sendFile(path.join(__dirname, "index.html"));
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "html/index.html"));
 });
 app.get("/reserve", function (req, res) {
-  res.sendFile(path.join(__dirname, "reserve.html"));
+  res.sendFile(path.join(__dirname, "html/reserve.html"));
 });
 app.get("/index", function (req, res) {
-  res.sendFile(path.join(__dirname, "tables.html"));
+  res.sendFile(path.join(__dirname, "html/tables.html"));
 });
 
 // Starts the server to begin listening
