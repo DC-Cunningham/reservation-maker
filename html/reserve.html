@@ -65,7 +65,7 @@
                                 <input type="text" class="form-control" id="reserve_uniqueID">
                             </div>
 
-                            <button type="submit" class="btn btn-primary submit">Submit</button>
+                            <button type="submit" class="btn btn-primary submit" id="submit-btn">Submit</button>
                         </form>
 
                     </div>
@@ -83,6 +83,26 @@
 
     </div>
 
+    <script type="text/javascript">
+        $("#submit-btn").on("click", function (event) {
+            event.preventDefault();
+            var newReservation = {
+                name: $("#reserve_name").val().trim(),
+                phone: $("#reserve_phone").val().trim(),
+                email: $("#reserve_email").val().trim(),
+                uniqueID: $("#reserve_uniqueID").val().trim()
+            };
+
+            $.post("/reserve", newReservation)
+                .then(function (data) {
+                    if (data == true) {
+                        alert("Your table has been reserved successfully!");
+                    } else {
+                        alert("Sorry, You are on the waitlist!");
+                    }
+                });
+        });
+    </script>
 </body>
 
 </html>
