@@ -49,6 +49,19 @@ app.get("/reservations", function (req, res) {
   return res.json(reservations);
 });
 
+app.post("/reserve", function (req, res) {
+  const newReservation = req.body;
+
+  if (reservations.length < 5) {
+    reservations.push(newReservation);
+    res.send(true);
+  }
+  else {
+    waitlist.push(newReservation);
+    res.send(false);
+  }
+});
+
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function () {
